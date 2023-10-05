@@ -38,7 +38,8 @@ else:
             examples.append(ex2)
 
 tokenizer = AutoTokenizer.from_pretrained('huggyllama/llama-7b')
-model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='auto', load_in_8bit=True)
+# model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='auto', load_in_8bit=True)
+model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='cpu', load_in_8bit=True)
 
 for idx in tqdm.tqdm(range(int(len(examples)/16))):
     
