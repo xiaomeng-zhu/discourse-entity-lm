@@ -7,7 +7,9 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 print("loading tokenizer")
 tokenizer = AutoTokenizer.from_pretrained('huggyllama/llama-7b')
 print("loading model")
-model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='auto', load_in_8bit=True)
+# model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='auto', load_in_8bit=True)
+model = AutoModelForCausalLM.from_pretrained('huggyllama/llama-7b', device_map='auto')
+
 
 eg_sentence = "John owns a dog and it follows him everywhere he goes."
 
