@@ -1,5 +1,6 @@
 # adapted from https://github.com/EleutherAI/lm-evaluation-harness/issues/539
-import json, csv, tqdm
+import json, csv
+from tqdm import tqdm
 import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForCausalLM
