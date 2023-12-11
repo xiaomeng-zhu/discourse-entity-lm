@@ -77,6 +77,7 @@ def generate_examples(items, boy_names, girl_names):
 
             example["id"] = "{}_{}_{}".format(str(total_idx), noun_1, noun_2)
 
+            # determine names
             if pronoun == "he":
                 name = boy_names[boy_idx] 
                 boy_idx += 1
@@ -92,9 +93,9 @@ def generate_examples(items, boy_names, girl_names):
                 am = generate_example_affirmative_modal_pst(name, pronoun, verb_pres, verb_alt, det_1, noun_1, det_2, noun_2, optional_PP)
             
             if verb_mf != "":
-                # a different verb for the managed failed case
+                # if there is a different verb for the managed failed case, use verb_mf for present tense
                 mf = generate_example_managed_failed(name, pronoun, verb_mf, verb_alt, det_1, noun_1, det_2, noun_2, optional_PP)
-            else:
+            else: # otherwise, use verb_pres
                 mf = generate_example_managed_failed(name, pronoun, verb_pres, verb_alt, det_1, noun_1, det_2, noun_2, optional_PP)
             
             kd = generate_example_know_doubt(name, pronoun, verb_pres, verb_alt, det_1, noun_1, det_2, noun_2, optional_PP)
@@ -119,47 +120,47 @@ def generate_examples(items, boy_names, girl_names):
 
 
 def generate_example_affirmative_negation_pst(name, pronoun, verb_pres, verb_pst, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    negation_affirmative_1 = "{} didn't {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pst, indef_2, noun_2)
-    negation_affirmative_2 = "{} didn't {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pst, indef_1, noun_1)
-    affirmative_negation_1 = "{} {} {} {} {}but {} didn't {} {} {}.".format(name, verb_pst, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    affirmative_negation_2 = "{} {} {} {} {}but {} didn't {} {} {}.".format(name, verb_pst, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
+    negation_affirmative_1 = f"{name} didn't {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} {verb_pst} {indef_2} {noun_2}."
+    negation_affirmative_2 = f"{name} didn't {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} {verb_pst} {indef_1} {noun_1}."
+    affirmative_negation_1 = f"{name} {verb_pst} {indef_1} {noun_1} {optional_PP}but {pronoun} didn't {verb_pres} {indef_2} {noun_2}."
+    affirmative_negation_2 = f"{name} {verb_pst} {indef_2} {noun_2} {optional_PP}but {pronoun} didn't {verb_pres} {indef_1} {noun_1}."
     return [negation_affirmative_1, negation_affirmative_2, affirmative_negation_1, affirmative_negation_2]
 
 def generate_example_affirmative_negation_pres(name, pronoun, verb_pres, verb_pres_s, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    negation_affirmative_1 = "{} doesn't {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pres_s, indef_2, noun_2)
-    negation_affirmative_2 = "{} doesn't {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pres_s, indef_1, noun_1)
-    affirmative_negation_1 = "{} {} {} {} {}but {} doesn't {} {} {}.".format(name, verb_pres_s, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    affirmative_negation_2 = "{} {} {} {} {}but {} doesn't {} {} {}.".format(name, verb_pres_s, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
+    negation_affirmative_1 = f"{name} doesn't {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} {verb_pres_s} {indef_2} {noun_2}."
+    negation_affirmative_2 = f"{name} doesn't {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} {verb_pres_s} {indef_1} {noun_1}."
+    affirmative_negation_1 = f"{name} {verb_pres_s} {indef_1} {noun_1} {optional_PP}but {pronoun} doesn't {verb_pres} {indef_2} {noun_2}."
+    affirmative_negation_2 = f"{name} {verb_pres_s} {indef_2} {noun_2} {optional_PP}but {pronoun} doesn't {verb_pres} {indef_1} {noun_1}."
     return [negation_affirmative_1, negation_affirmative_2, affirmative_negation_1, affirmative_negation_2]
 
 
 def generate_example_affirmative_modal_pst(name, pronoun, verb_pres, verb_pst, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    modal_affirmative_1 = "{} wanted to {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pst, indef_2, noun_2)
-    modal_affirmative_2 = "{} wanted to {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pst, indef_1, noun_1)
-    affirmative_modal_1 = "{} {} {} {} {}but {} wanted to {} {} {}.".format(name, verb_pst, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    affirmative_modal_2 = "{} {} {} {} {}but {} wanted to {} {} {}.".format(name, verb_pst, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
+    modal_affirmative_1 = f"{name} wanted to {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} {verb_pst} {indef_2} {noun_2}."
+    modal_affirmative_2 = f"{name} wanted to {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} {verb_pst} {indef_1} {noun_1}."
+    affirmative_modal_1 = f"{name} {verb_pst} {indef_1} {noun_1} {optional_PP}but {pronoun} wanted to {verb_pres} {indef_2} {noun_2}."
+    affirmative_modal_2 = f"{name} {verb_pst} {indef_2} {noun_2} {optional_PP}but {pronoun} wanted to {verb_pres} {indef_1} {noun_1}."
     return [modal_affirmative_1, modal_affirmative_2, affirmative_modal_1, affirmative_modal_2]
 
 def generate_example_affirmative_modal_pres(name, pronoun, verb_pres, verb_pres_s, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    modal_affirmative_1 = "{} wants to {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pres_s, indef_2, noun_2)
-    modal_affirmative_2 = "{} wants to {} {} {} {}but {} {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pres_s, indef_1, noun_1)
-    affirmative_modal_1 = "{} {} {} {} {}but {} wants to {} {} {}.".format(name, verb_pres_s, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    affirmative_modal_2 = "{} {} {} {} {}but {} wants to {} {} {}.".format(name, verb_pres_s, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
+    modal_affirmative_1 = f"{name} wants to {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} {verb_pres_s} {indef_2} {noun_2}."
+    modal_affirmative_2 = f"{name} wants to {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} {verb_pres_s} {indef_1} {noun_1}."
+    affirmative_modal_1 = f"{name} {verb_pres_s} {indef_1} {noun_1} {optional_PP}but {pronoun} wants to {verb_pres} {indef_2} {noun_2}."
+    affirmative_modal_2 = f"{name} {verb_pres_s} {indef_2} {noun_2} {optional_PP}but {pronoun} wants to {verb_pres} {indef_1} {noun_1}."
     return [modal_affirmative_1, modal_affirmative_2, affirmative_modal_1, affirmative_modal_2]
 
 
 def generate_example_managed_failed(name, pronoun, verb_pres, verb_pst, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    managed_failed_1 = "{} managed to {} {} {} {}but {} failed to {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    managed_failed_2 = "{} managed to {} {} {} {}but {} failed to {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
-    failed_managed_1 = "{} failed to {} {} {} {}but {} managed to {} {} {}.".format(name, verb_pres, indef_1, noun_1, optional_PP, pronoun, verb_pres, indef_2, noun_2)
-    failed_managed_2 = "{} failed to {} {} {} {}but {} managed to {} {} {}.".format(name, verb_pres, indef_2, noun_2, optional_PP, pronoun, verb_pres, indef_1, noun_1)
+    managed_failed_1 = f"{name} managed to {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} failed to {verb_pres} {indef_2} {noun_2}."
+    managed_failed_2 = f"{name} managed to {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} failed to {verb_pres} {indef_1} {noun_1}."
+    failed_managed_1 = f"{name} failed to {verb_pres} {indef_1} {noun_1} {optional_PP}but {pronoun} managed to {verb_pres} {indef_2} {noun_2}."
+    failed_managed_2 = f"{name} failed to {verb_pres} {indef_2} {noun_2} {optional_PP}but {pronoun} managed to {verb_pres} {indef_1} {noun_1}."
     return [managed_failed_1, managed_failed_2, failed_managed_1, failed_managed_2]
 
 def generate_example_know_doubt(name, pronoun, verb_pres, verb_altt, indef_1, noun_1, indef_2, noun_2, optional_PP):
-    know_doubt_1 = "I know that {} {} {} {} {}but I doubt that {} {} {} {}.".format(name, verb_altt, indef_1, noun_1, optional_PP, pronoun, verb_altt, indef_2, noun_2)
-    know_doubt_2 = "I know that {} {} {} {} {}but I doubt that {} {} {} {}.".format(name, verb_altt, indef_2, noun_2, optional_PP, pronoun, verb_altt, indef_1, noun_1)
-    doubt_know_1 = "I doubt that {} {} {} {} {}but I know that {} {} {} {}.".format(name, verb_altt, indef_1, noun_1, optional_PP, pronoun, verb_altt, indef_2, noun_2)
-    doubt_know_2 = "I doubt that {} {} {} {} {}but I know that {} {} {} {}.".format(name, verb_altt, indef_2, noun_2, optional_PP, pronoun, verb_altt, indef_1, noun_1)
+    know_doubt_1 = f"I know that {name} {verb_altt} {indef_1} {noun_1} {optional_PP}but I doubt that {pronoun} {verb_altt} {indef_2} {noun_2}."
+    know_doubt_2 = f"I know that {name} {verb_altt} {indef_2} {noun_2} {optional_PP}but I doubt that {pronoun} {verb_altt} {indef_1} {noun_1}."
+    doubt_know_1 = f"I doubt that {name} {verb_altt} {indef_1} {noun_1} {optional_PP}but I know that {pronoun} {verb_altt} {indef_2} {noun_2}."
+    doubt_know_2 = f"I doubt that {name} {verb_altt} {indef_2} {noun_2} {optional_PP}but I know that {pronoun} {verb_altt} {indef_1} {noun_1}."
     return [know_doubt_1, know_doubt_2, doubt_know_1, doubt_know_2]
 
 def write_to_csv(examples):

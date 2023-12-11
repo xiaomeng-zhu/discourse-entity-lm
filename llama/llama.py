@@ -8,9 +8,9 @@ import numpy as np
 
 # ======= load in data ======
 print("Loading data...")
-stimuli_dir = "stimuli/"
-single_noun_data_fname = "full_sentence_hand_written_stimuli.jsonl"
-double_noun_data_fname = "2nouns_full_sentence_hand_written_stimuli.jsonl"
+stimuli_dir = "llama/"
+# single_noun_data_fname = "full_sentence_hand_written_stimuli.jsonl"
+double_noun_data_fname = "extended_stimuli_complete.jsonl"
 
 def load_single_noun_data(fname):
     single_noun_data = []
@@ -61,6 +61,7 @@ def load_double_noun_data(fname):
     return double_noun_data
 
 double_noun_data = load_double_noun_data(double_noun_data_fname)
+print(len(double_noun_data))
 # print(len(single_noun_data), len(double_noun_data))
 
 # ======= load in tokenizer and model ======
@@ -121,7 +122,7 @@ def exp1(tokenizer, model, single_noun_data):
     return single_noun_data
 
 def exp2(tokenizer, model, double_noun_data):
-    for example in double_noun_data:
+    for example in tqdm(double_noun_data, desc="Processing items", unit="item"):
         sentence = example['sentence'].strip()
         tokens = tokenizer.tokenize(sentence)
 
@@ -155,7 +156,7 @@ def exp2(tokenizer, model, double_noun_data):
         example["critical_token_idx"] = critical_token_idx
         example["id_num"] = example["id"].split("_")[0]
         example["tokens"] = "|".join(tokens)
-        print(example)
+        # print(example)
     return double_noun_data
               
 # single_noun_res = exp1(tokenizer, model, single_noun_data)
@@ -168,4 +169,4 @@ def res_to_csv(out_fname, data):
         writer.writerows(data)
 
 # res_to_csv("llama2_entity_single_res.csv", single_noun_res)
-res_to_csv("llama2_entity_double_res.csv", double_noun_res)
+res_to_csv("llama2_extended.csv", double_noun_res)
