@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #SBATCH --job-name=my_job
-#SBATCH --time=2-00:00:00
+#SBATCH --time=1-12:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --partition week
 #SBATCH --mem=32G
